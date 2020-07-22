@@ -7517,8 +7517,8 @@ int alloc_contig_range(unsigned long start, unsigned long end,
 	}
 
 	/* Make sure the range is really isolated. */
-	ret = test_pages_isolated(outer_start, end, false);
-	if (ret) {
+	if (test_pages_isolated(outer_start, end, false)) {
+		ret = -EBUSY;
 		goto done;
 	}
 
